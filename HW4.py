@@ -1,6 +1,25 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# Define matrices A, b, and C
+A = np.array([[1, 0], [1, 1], [1, 2], [1, 3]])
+b = np.array([[0], [2], [1], [6]])
+C = np.diag([0.2, 0.3, 0.3, 0.2])
+
+# Calculate A^T C A
+AT_C_A = A.T @ C @ A
+
+# Calculate (A^T C A)^(-1)
+AT_C_A_inv = np.linalg.inv(AT_C_A)
+
+# Calculate A^T C b
+AT_C_b = A.T @ C @ b
+
+# Calculate the result (A^T C A)^(-1) A^T C b
+result = AT_C_A_inv @ AT_C_b
+
+print("The result is:\n", result)
+
 # Define the function f(x)
 def f(x):
     return 4 + 8*x**2 - x**4
@@ -128,6 +147,11 @@ def f_bisection(x):
 a = 1
 b = 2
 tolerance = 1e-5
+
+# Perform Bisection Method
+root = bisection_method(f_bisection, a, b, tolerance)
+
+print(f"Root found by Bisection Method: x = {root:.6f}")
 
 # Perform Bisection Method
 root = bisection_method(f_bisection, a, b, tolerance)
