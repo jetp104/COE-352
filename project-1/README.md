@@ -95,13 +95,15 @@ A^{-1}_{\text{black box}} = \begin{bmatrix}
 $$
 
 **If the matrix is noninvertable**
-Using the Matrix: 
+Using the matrix:
+
 $$
 \begin{bmatrix}
 2 & 4 \\
-1 & 2 \\
+1 & 2
 \end{bmatrix}
 $$
+
 
 you'll get the following message: 
 
