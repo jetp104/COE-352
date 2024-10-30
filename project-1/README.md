@@ -116,5 +116,12 @@ ValueError: The matrix is non-invertible (has zero singular values)
 
 # Fixed-Free System Example
 For the Fixed-Free system example we use 3 masses, with 3 springs, where masses = spring constants = 1 we get the result: 
-![image](https://github.com/user-attachments/assets/0e749c25-fe90-4143-a70b-c0afaf6b7137)
+![image](https://github.com/user-attachments/assets/15f064df-b5ab-4e12-bca3-16c248a458a9)
 
+# Fixed-Fixed System Example
+For the Fixed-Fixed system example we use 3 masses, with 4 springs, where masses = spring constants = 1 we get the result: 
+![image](https://github.com/user-attachments/assets/18fa9b31-c9af-4564-a605-920b6d38bbf4)
+
+# Free-Free System Example
+For the Fixed-Fixed system example we use 3 masses, with 2 springs, where masses = spring constants = 1 we get the result: 
+![image](https://github.com/user-attachments/assets/559eae17-ef1a-440a-88f1-ba02c67fc32b)
