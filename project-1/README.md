@@ -127,3 +127,12 @@ For the Fixed-Fixed system example we use 3 masses, with 4 springs, where masses
 # Free-Free System Example
 For the Fixed-Fixed system example we use 3 masses, with 2 springs, where masses = spring constants = 1 we get the result: 
 ![image](https://github.com/user-attachments/assets/559eae17-ef1a-440a-88f1-ba02c67fc32b)
+
+# Bad Input Examples
+Not using one of the three options (one, two, or none) will get you this error: 
+![image](https://github.com/user-attachments/assets/865d5772-a048-46a1-9948-9ec446081b91)
+
+Not providing number of masses, a valid number for the weight of the mass, or a valid number for the spring constant will get you this error: 
+![image](https://github.com/user-attachments/assets/33bf7af4-7846-4aca-9b65-c465ba4a273f)
+
+
