@@ -106,9 +106,14 @@ def assemble_stiffness_matrix_with_boundary_conditions(spring_constants: np.arra
             A[i, i] = 1
             A[i+1, i] = -1
         K = A.T @ C @ A
-
-    # Compute the stiffness matrix K using A and C
-    K = A.T @ C @ A
+    
+    elif boundary_conditions == 'none': 
+                # Free-free system (no fixed ends)
+        for i in range(num_springs):
+            A[i, i] = 1
+            if i + 1 < num_masses:
+                A[i, i + 1] = -1
+        K = A.T @ C @ A
     return A, C, K
 
 def spring_mass_system(spring_constants: np.ndarray, masses: np.ndarray, boundary_conditions: str):
@@ -120,11 +125,14 @@ def spring_mass_system(spring_constants: np.ndarray, masses: np.ndarray, boundar
     u, sigma, v, singular_values, cond, K_inv, evals = svd_custom(K)
     if K_inv is None:
         raise ValueError("The system matrix K could not be inversed")
-
+    K_vals= singular_values**2
     print("Singular values of K:", singular_values)
-    print("Eigenvalues of K^T K:", evals)
+    print("Eigenvalues of K:", K_vals)
     print("L2 Condition number of K:", cond)
 
+    if cond >= 1000: 
+        print(f"Warning: The condition number of the matrix is {cond:.2e}, which is very high. This indicates that the matrix ill-conditioned and solutions may be unstable or inaccurate. Since the Conditional Number is apporaching infinity we know the matrix is non-invertible")
+        quit() 
     # Calculate equilibrium displacements
     u_disp = K_inv @ f
 
@@ -149,12 +157,33 @@ def spring_mass_system(spring_constants: np.ndarray, masses: np.ndarray, boundar
 def input_parameters(boundary_conditions: str) -> tuple:
     try:
         num_masses = int(input("Enter the number of masses: "))
-        num_springs = num_masses if boundary_conditions == "one" else num_masses + 1
-        spring_constants = np.array([float(input(f"Enter spring constant for spring {i + 1}: ")) for i in range(num_springs)])
-        masses = np.array([float(input(f"Enter mass for mass {i + 1}: ")) for i in range(num_masses)])
+        
+        # Set number of springs based on boundary conditions
+        if boundary_conditions == "one":
+            num_springs = num_masses  # One fixed end
+        elif boundary_conditions == "two":
+            num_springs = num_masses + 1  # Both ends fixed
+        elif boundary_conditions == "none":
+            num_springs = num_masses - 1  # Free-free system
+        else:
+            print("Invalid boundary condition. Use 'one', 'two', or 'none'.")
+            return
+        
+        # Input spring constants and masses
+        spring_constants = np.array([
+            float(input(f"Enter spring constant for spring {i + 1}: ")) 
+            for i in range(num_springs)
+        ])
+        masses = np.array([
+            float(input(f"Enter mass for mass {i + 1}: ")) 
+            for i in range(num_masses)
+        ])
+        
         return num_masses, spring_constants, masses
+    
     except (ValueError, TypeError) as e:
-        return print("Invalid input. Please enter numerical values.")
+        print("Invalid input. Please enter numerical values.")
+        return
 
 def calculate_spring_mass_system(boundary_conditions: str):
     num_masses, spring_constants, masses = input_parameters(boundary_conditions)
@@ -163,9 +192,7 @@ def calculate_spring_mass_system(boundary_conditions: str):
 # Example usage
 if __name__ == "__main__":
     boundary_condition_input = input("Enter boundary conditions ('one' or 'two' or 'none'): ").strip().lower()
-    if boundary_condition_input == 'none': 
-        print("The system is unconstrained and doesn't have full rank, so it can't be solved.")
-    elif boundary_condition_input == 'one' or boundary_condition_input == 'two':
+    if boundary_condition_input == 'one' or boundary_condition_input == 'two' or boundary_condition_input == 'none':
         calculate_spring_mass_system(boundary_condition_input)
     else:
         raise ValueError("Invalid input. Please choose 'one', 'two', or 'none' for boundary conditions.")
