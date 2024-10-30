@@ -94,7 +94,7 @@ A^{-1}_{\text{black box}} = \begin{bmatrix}
 \end{bmatrix}
 $$
 
-**If the matrix is noninvertable**
+## If The Matrix Is Non-invertible
 Using the matrix:
 
 $$
