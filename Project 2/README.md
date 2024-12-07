@@ -38,4 +38,10 @@ This problem is solved using the Galerkin method within the context of the 1D FE
 We are asked to derive the weak form of the equation by hand. The weak form of the equation is derived as follows:
 ![Weak Form Derivation](derivation.PNG)
 
+## Forward Euler Implementation
+The second part of the problem was the implementation of **Forward Euler time derivative discretization** with a time-step of **Δt = 1/551**. The time-stepping method was applied to solve the heat equation, and the results were plotted against the exact solution.
 
+After running the model and plotting the results, we obtained the following:
+![image](https://github.com/user-attachments/assets/af431cf0-f44a-4ec5-a23b-99ebfe695c6b)
+
+As we can see the approximation of the Forward Euler method was very close to the exact solution given 11 nodes and a time-step of **Δt = 1/551**
