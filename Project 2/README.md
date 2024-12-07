@@ -36,6 +36,6 @@ This problem is solved using the Galerkin method within the context of the 1D FE
 
 ## Weak Form Derivation
 We are asked to derive the weak form of the equation by hand. The weak form of the equation is derived as follows:
-![Weak Form Derivation](derivation.png)
+![Weak Form Derivation](derivation.PNG)
 
 
